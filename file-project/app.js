@@ -4,6 +4,8 @@ const fs = require("fs/promises");
   const watcher = fs.watch("./");
 
   for await (const event of watcher) {
-    console.log(event);
+    if (event.eventType === "change" && event.filename === "command.txt") {
+      console.log("The file was changed");
+    }
   }
 })();
