@@ -1,1 +1,2 @@
-create a file text.txt
+add to the file testing.txt this content: --this is nice--
+
