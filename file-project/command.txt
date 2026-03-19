@@ -1,2 +1,2 @@
-add to the file testing.txt this content: --this is nice--
+delete the file test.txt
 
