@@ -1,3 +1,11 @@
-console.time("writeMany");
-let a = 2 + 2;
-console.timeEnd("writeMany");
+const fs = require("node:fs/promises");
+
+(async () => {
+  console.time("writeMany");
+  const fileHandle = await fs.open("test.txt", "w");
+
+  for (let i = 0; i < 1000000; i++) {
+    await fileHandle.write(`${1}`);
+  }
+  console.timeEnd("writeMany");
+})();
