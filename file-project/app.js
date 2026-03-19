@@ -22,6 +22,7 @@ const fs = require("fs/promises");
   const deleteFile = async (path) => {
     try {
       await fs.unlink(path);
+      console.log("The file was successfully removed");
     } catch (e) {
       if (e.code === "ENOENT") {
         console.log("No file at this path to remove");
@@ -34,21 +35,32 @@ const fs = require("fs/promises");
 
   const renameFile = async (oldPath, newPath) => {
     try {
-      await fs.access(oldPath);
       await fs.rename(oldPath, newPath);
-      console.log(`Rename ${oldPath} to ${newPath}`);
+      console.log("The file was successfully renamed");
     } catch (error) {
-      console.error("File did not exist");
+      if (e.code === "ENOENT") {
+        console.log(
+          "No file at this path to rename, or the destination doesn't exist",
+        );
+      } else {
+        console.log("An error occurred while removing the file: ");
+        console.log(e);
+      }
     }
   };
 
+  let addedContent;
+
   const addToFile = async (path, content) => {
+    if (addedContent === content) return;
     try {
-      await fs.appendFile(path, content);
-      console.log(`Adding to ${path}`);
-      console.log(`Content: ${content}`);
+      const fileHandle = await fs.open(path, "a");
+      fileHandle.write(content);
+      addedContent = content;
+      console.log("The content was added successfully");
     } catch (error) {
-      console.log("File could not be edited");
+      console.log("An error occured while removing the file: ");
+      console.log(e);
     }
   };
 

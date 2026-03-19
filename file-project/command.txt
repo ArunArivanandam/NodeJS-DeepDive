@@ -1,2 +1,4 @@
-delete the file test.txt
+add to the file test.txt this content: welcome
+
+
 
